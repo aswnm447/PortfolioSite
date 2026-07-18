@@ -29,14 +29,20 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
 }
 
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top left, rgba(96,165,250,0.18), transparent 18%),
-              radial-gradient(circle at bottom right, rgba(37,99,235,0.10), transparent 18%);
+  background:
+    radial-gradient(circle at 8% 10%, rgba(96,165,250,0.20), transparent 17%),
+    radial-gradient(circle at 92% 8%, rgba(59,130,246,0.14), transparent 15%),
+    radial-gradient(circle at 8% 92%, rgba(37,99,235,0.12), transparent 16%),
+    radial-gradient(circle at 92% 92%, rgba(96,165,250,0.16), transparent 16%);
   pointer-events: none;
   z-index: -1;
 }
@@ -119,11 +125,14 @@ nav {
 /* Hamburger menu */
 #hamburger-nav {
   display: none;
+  position: relative;
+  z-index: 1000;
 }
 
 .hamburger-menu {
   position: relative;
   display: inline-block;
+  z-index: 1001;
 }
 
 .hamburger-icon {
@@ -151,6 +160,8 @@ nav {
   max-height: 0;
   overflow: hidden;
   transition: all 0.3 ease-in-out;
+  z-index: 1002;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
 }
 
 .menu-links a {
@@ -299,30 +310,154 @@ section {
   position: relative;
 }
 
-.about-containers {
-  gap: 2rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+.about-intro {
+  max-width: 760px;
+  margin: 1rem auto 1.5rem;
+  text-align: center;
 }
 
-.about-details-container {
-  justify-content: center;
-  flex-direction: column;
+.about-intro p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 0;
 }
 
-.about-containers,
-.about-details-container {
+.about-journey {
+  position: relative;
+  width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 0.5rem;
+  min-height: 220px;
+  overflow: hidden;
+  margin-top: 1.5rem;
 }
 
-.about-pic {
-  border-radius: 2rem;
-}
-
-.arrow {
+.journey-line {
   position: absolute;
-  right: -5rem;
-  bottom: 2.5rem;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(37,99,235,0.18), rgba(37,99,235,0.5));
+  border-radius: 999px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 18px rgba(37,99,235,0.12);
+}
+
+.journey-particle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: #2563EB;
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(37,99,235,0.65);
+  transform: translate(-50%, -50%);
+  animation: journeyTravel 5.5s linear infinite;
+}
+
+.journey-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  opacity: 0.5;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.journey-step.active {
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+.journey-node {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffffff, #eef6ff);
+  border: 1px solid rgba(37,99,235,0.22);
+  display: grid;
+  place-items: center;
+  color: #2563EB;
+  box-shadow: 0 8px 24px rgba(37,99,235,0.14);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.journey-node span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  transform: translateY(1px);
+  font-weight: 700;
+}
+
+.journey-step.active .journey-node {
+  transform: scale(1.06);
+  box-shadow: 0 10px 28px rgba(37,99,235,0.22);
+}
+
+.journey-node.muted {
+  color: #9ca3af;
+  border-color: rgba(156,163,175,0.3);
+}
+
+.journey-card {
+  min-width: 120px;
+  padding: 0.7rem 0.8rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(37,99,235,0.14);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+  text-align: center;
+  transform: translateY(8px) scale(0.94);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.journey-step.active .journey-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.journey-card h3 {
+  font-size: 0.85rem;
+  color: #111827;
+  margin-bottom: 0.2rem;
+}
+
+.journey-card p {
+  font-size: 0.74rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.muted-card {
+  background: rgba(248,250,252,0.85);
+  border-color: rgba(209,213,219,0.7);
+}
+
+@keyframes journeyTravel {
+  0% {
+    left: 0%;
+    opacity: 0.4;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0.4;
+  }
 }
 
 .details-containers {
