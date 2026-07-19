@@ -7,6 +7,220 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mediaquiries.css">
+    <style>
+        #experience .experience-details-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem;
+        }
+
+        #experience .experience-shell {
+            display: grid;
+            gap: 1.6rem;
+        }
+
+        #experience .experience-skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.1rem;
+        }
+
+        #experience .experience-skill-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(59, 130, 246, 0.16);
+            border-radius: 20px;
+            padding: 1.2rem 1.25rem;
+            box-shadow: 0 14px 35px rgba(17, 24, 39, 0.07);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        #experience .experience-skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(17, 24, 39, 0.12);
+            border-color: rgba(59, 130, 246, 0.8);
+        }
+
+        #experience .experience-sub-title {
+            margin-bottom: 0.9rem;
+            font-size: 1.15rem;
+            color: #102a43;
+        }
+
+        #experience .experience-article-container {
+            display: grid;
+            gap: 0.8rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        #experience .experience-skill-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.8rem 0.85rem;
+            border-radius: 14px;
+            background: #f7faff;
+            border: 1px solid transparent;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+        }
+
+        #experience .experience-skill-item:hover {
+            transform: translateY(-3px);
+            border-color: rgba(59, 130, 246, 0.7);
+            box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+        }
+
+        #experience .experience-skill-item h3 {
+            margin: 0 0 0.2rem;
+            font-size: 0.95rem;
+            color: #102a43;
+        }
+
+        #experience .experience-skill-item p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #5b6b7f;
+        }
+
+        #experience .experience-what-i-do {
+            background: linear-gradient(135deg, rgba(247, 250, 255, 0.97), rgba(235, 243, 255, 0.95));
+            border: 1px solid rgba(59, 130, 246, 0.16);
+            border-radius: 24px;
+            padding: 1.25rem 1.1rem 1.35rem;
+            box-shadow: 0 14px 34px rgba(17, 24, 39, 0.07);
+        }
+
+        #experience .experience-timeline-header {
+            margin-bottom: 0.95rem;
+        }
+
+        #experience .experience-timeline-caption {
+            margin: 0;
+            color: #55657a;
+            font-size: 0.92rem;
+        }
+
+        #experience .experience-timeline {
+            position: relative;
+            min-height: 220px;
+            padding: 1rem 0;
+        }
+
+        #experience .experience-timeline-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 2px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.95), rgba(59, 130, 246, 0.1));
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+
+        #experience .experience-particle {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            background: #4f8cff;
+            box-shadow: 0 0 14px #4f8cff, 0 0 26px rgba(79, 140, 255, 0.8);
+            pointer-events: none;
+        }
+
+        #experience .experience-milestone {
+            position: absolute;
+            top: 50%;
+            left: var(--milestone-pos, 0%);
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.55rem;
+            width: 178px;
+            text-align: center;
+        }
+
+        #experience .experience-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4f8cff;
+            box-shadow: 0 0 0 4px rgba(79, 140, 255, 0.16);
+        }
+
+        #experience .experience-milestone-card {
+            opacity: 0;
+            transform: translateY(12px) scale(0.96);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(59, 130, 246, 0.12);
+            border-radius: 16px;
+            padding: 0.8rem 0.8rem 0.9rem;
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+            width: 100%;
+            min-height: 82px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #experience .experience-milestone.visible .experience-milestone-card {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        #experience .experience-milestone-card h3 {
+            margin: 0 0 0.25rem;
+            font-size: 0.95rem;
+            color: #102a43;
+        }
+
+        #experience .experience-milestone-card p {
+            margin: 0;
+            color: #5b6b7f;
+            font-size: 0.82rem;
+        }
+
+        @media (max-width: 768px) {
+            #experience .experience-skill-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #experience .experience-article-container {
+                grid-template-columns: 1fr;
+            }
+
+            #experience .experience-timeline {
+                min-height: 560px;
+            }
+
+            #experience .experience-timeline-line {
+                left: 24px;
+                top: 0;
+                bottom: 0;
+                right: auto;
+                width: 2px;
+                height: auto;
+                transform: none;
+            }
+
+            #experience .experience-particle {
+                left: 24px;
+                top: 0;
+                transform: translate(-50%, -50%);
+            }
+
+            #experience .experience-milestone {
+                left: 24px;
+                top: var(--milestone-pos, 0%);
+                transform: translate(-50%, -50%);
+                width: 180px;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav id="desktop-nav">
@@ -112,60 +326,117 @@
         <p class="section__text__p1">Explore My</p>
         <h1 class="title">Experience</h1>
         <div class="experience-details-container">
-            <div class="about-containers">
-                <div class="details-containers">
-                    <h2 class="experience-sub-title">Technical Stacks</h2>
-                    <div class="article-container">
-                        <article>
-                            <img src="assets/checkmark.png" alt="Experience icon"
-                            class="icon">
-                            <div>
-                                <h3>Python</h3>
-                                <p>Intermediate</p>
-                            </div>
-                        </article>
-                        <article>
-                            <img src="assets/checkmark.png" alt="Experience icon"
-                            class="icon">
-                            <div>
-                                <h3>C</h3>
-                                <p>Intermediate</p>
-                            </div>
-                        </article>
-                        
+            <div class="experience-shell">
+                <div class="experience-skill-grid">
+                    <div class="details-containers experience-skill-card">
+                        <h2 class="experience-sub-title">Technical Stacks</h2>
+                        <div class="article-container experience-article-container">
+                            <article class="experience-skill-item">
+                                <img src="assets/checkmark.png" alt="Experience icon" class="icon">
+                                <div>
+                                    <h3>Python</h3>
+                                    <p>Intermediate</p>
+                                </div>
+                            </article>
+                            <article class="experience-skill-item">
+                                <img src="assets/checkmark.png" alt="Experience icon" class="icon">
+                                <div>
+                                    <h3>C</h3>
+                                    <p>Intermediate</p>
+                                </div>
+                            </article>
+                            <article class="experience-skill-item">
+                                <img src="assets/checkmark.png" alt="Experience icon" class="icon">
+                                <div>
+                                    <h3>HTML</h3>
+                                    <p>Advanced</p>
+                                </div>
+                            </article>
+                            <article class="experience-skill-item">
+                                <img src="assets/checkmark.png" alt="Experience icon" class="icon">
+                                <div>
+                                    <h3>CSS</h3>
+                                    <p>Intermediate</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="details-containers experience-skill-card">
+                        <h2 class="experience-sub-title">Tools</h2>
+                        <div class="article-container experience-article-container">
+                            <article class="experience-skill-item">
+                                <img src="assets/checkmark.png" alt="Experience icon" class="icon">
+                                <div>
+                                    <h3>Canva</h3>
+                                    <p>Experienced</p>
+                                </div>
+                            </article>
+                            <article class="experience-skill-item">
+                                <img src="assets/checkmark.png" alt="Experience icon" class="icon">
+                                <div>
+                                    <h3>Figma</h3>
+                                    <p>Beginner</p>
+                                </div>
+                            </article>
+                            <article class="experience-skill-item">
+                                <img src="assets/checkmark.png" alt="Experience icon" class="icon">
+                                <div>
+                                    <h3>VS Code</h3>
+                                    <p>Beginner</p>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
-                <div class="details-containers">
-                    <h2 class="experience-sub-title">Tools</h2>
-                    <div class="article-container">
-                        <article>
-                            <img src="assets/checkmark.png" alt="Experience icon"
-                            class="icon">
-                            <div>
-                                <h3>Canva</h3>
-                                <p>Experienced</p>
+
+                <div class="experience-what-i-do">
+                    <div class="experience-timeline-header">
+                        <h2 class="experience-sub-title">What I Do</h2>
+                        <p class="experience-timeline-caption">A steady path of learning, building, designing, and improving.</p>
+                    </div>
+                    <div class="experience-timeline">
+                        <div class="experience-timeline-line"></div>
+                        <div class="experience-particle" id="experienceParticle"></div>
+
+                        <div class="experience-milestone" data-progress="0.125" style="--milestone-pos: 12.5%;">
+                            <div class="experience-dot"></div>
+                            <div class="experience-milestone-card">
+                                <h3>Learn </h3>
+                                <p>Constantly learning new technologies.</p>
                             </div>
-                        </article>
-                        <article>
-                            <img src="assets/checkmark.png" alt="Experience icon"
-                            class="icon">
-                            <div>
-                                <h3>Figma</h3>
-                                <p>Beginner</p>
+                        </div>
+                        <div class="experience-milestone" data-progress="0.375" style="--milestone-pos: 37.5%;">
+                            <div class="experience-dot"></div>
+                            <div class="experience-milestone-card">
+                                <h3>Build </h3>
+                                <p>Developing responsive web applications.</p>
                             </div>
-                        </article>
-                        
-                        
+                        </div>
+                        <div class="experience-milestone" data-progress="0.625" style="--milestone-pos: 62.5%;">
+                            <div class="experience-dot"></div>
+                            <div class="experience-milestone-card">
+                                <h3>Design </h3>
+                                <p>Creating clean, user-friendly UI.</p>
+                            </div>
+                        </div>
+                        <div class="experience-milestone" data-progress="0.875" style="--milestone-pos: 87.5%;">
+                            <div class="experience-dot"></div>
+                            <div class="experience-milestone-card">
+                                <h3>Improve </h3>
+                                <p>Continuously improving through projects.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      /> </section>
+        <img
+            src="./assets/arrow.png"
+            alt="Arrow icon"
+            class="icon arrow"
+            onclick="location.href='./#projects'"
+        />
+    </section>
     <section id="projects">
       <p class="section__text__p1">Browse My Recent</p>
       <h1 class="title">Projects</h1>
@@ -198,50 +469,18 @@
           <div class="details-containers color-container">
             <div class="article-container">
               <img
-                src="./assets/projectsoon.gif"
+                src="./assets/ai resume gen.png"
                 alt="Project 2"
                 class="project-img"
               />
             </div>
-            <h2 class="experience-sub-title project-title">Project Two</h2>
+            <h2 class="experience-sub-title project-title">AI RESUME BUILDER</h2>
+            <h3 class="project-subtitile">! Under Development !</h3>
             <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/aswnm447'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://githurb.com/'"
-              >
-                Live Demo <br> (Unavailable)
-              </button>
+             
+              
             </div>
-          </div>
-          <div class="details-containers color-container">
-            <div class="article-container">
-              <img
-                src="./assets/projectsoon.gif"
-                alt="Project 3"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Project Three</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/aswnm447'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://githurb.com/'"
-              >
-                Live Demo <br>(Unavailable)
-              </button>
-            </div>
+          
           </div>
         </div>
       </div>
@@ -280,6 +519,72 @@
     </nav>
     <p>Copyright &#169; 2026 Aswin Manoj. All Rights Reserved</p>
 </footer>
- <script src="script.js"></script>   
+ <script src="script.js"></script>
+ <script>
+    (function () {
+        const particle = document.getElementById('experienceParticle');
+        const milestones = Array.from(document.querySelectorAll('#experience .experience-milestone'));
+
+        if (!particle || milestones.length === 0) {
+            return;
+        }
+
+        let startTime = null;
+        let loopFrame = null;
+
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        function updateParticle(progress) {
+            const mobile = isMobile();
+            if (mobile) {
+                particle.style.top = `${progress * 100}%`;
+                particle.style.left = '24px';
+            } else {
+                particle.style.left = `${progress * 100}%`;
+                particle.style.top = '50%';
+            }
+        }
+
+        function revealMilestones(progress) {
+            milestones.forEach((milestone) => {
+                const threshold = parseFloat(milestone.getAttribute('data-progress') || '0');
+                if (progress >= threshold && !milestone.classList.contains('visible')) {
+                    milestone.classList.add('visible');
+                }
+            });
+        }
+
+        function animate(timestamp) {
+            if (!startTime) {
+                startTime = timestamp;
+            }
+
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(1, elapsed / 7000);
+            updateParticle(progress);
+            revealMilestones(progress);
+
+            if (progress < 1) {
+                loopFrame = window.requestAnimationFrame(animate);
+            } else {
+                milestones.forEach((milestone) => milestone.classList.remove('visible'));
+                startTime = null;
+                loopFrame = window.requestAnimationFrame(animate);
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            if (loopFrame) {
+                window.cancelAnimationFrame(loopFrame);
+            }
+            startTime = null;
+            loopFrame = window.requestAnimationFrame(animate);
+        });
+
+        loopFrame = window.requestAnimationFrame(animate);
+    })();
+ </script>
 </body>
 </html>
